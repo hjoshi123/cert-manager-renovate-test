@@ -112,19 +112,6 @@
       ],
     },
     {
-      description: 'Group GitHub Actions',
-      matchManagers: [
-        'github-actions',
-      ],
-    },
-    {
-      description: 'Pin Go version more conservatively',
-      matchDatasources: [
-        'golang-version',
-      ],
-      rangeStrategy: 'pin',
-    },
-    {
       description: 'Group testing tools',
       matchPackageNames: [
         'github.com/onsi/ginkgo',
@@ -156,43 +143,6 @@
         'github.com/golang-jwt/jwt',
         'google.golang.org/protobuf',
       ],
-    },
-    {
-      description: 'Be careful with Helm dependencies',
-      matchDatasources: [
-        'helm',
-      ],
-      rangeStrategy: 'bump',
-      enabled: false,
-      commitMessagePrefix: 'chore(helm):',
-    },
-    {
-      description: 'Group linting tools',
-      groupName: 'linters',
-      matchPackageNames: [
-        'golangci/golangci-lint',
-        'mvdan.cc/gofumpt',
-        'github.com/daixiang0/gci',
-      ],
-    },
-    {
-      description: 'Update cert-manager images',
-      matchDatasources: [
-        'docker',
-      ],
-      matchPackageNames: [
-        '/^quay.io/jetstack/cert-manager/',
-      ],
-    },
-    {
-      description: 'Disable cert manager updates',
-      matchDatasources: [
-        'go',
-      ],
-      matchPackageNames: [
-        '/^github.com/cert-manager/cert-manager$/',
-      ],
-      enabled: false,
     },
     {
       description: 'Limit major updates',
