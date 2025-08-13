@@ -17,9 +17,9 @@
   useBaseBranchConfig: 'merge',
   pruneStaleBranches: true,
   postUpgradeTasks: {
-    commands: [
-      "export PS1='> ' && make generate",
-    ],
+    // commands: [
+    //  "export PS1='> ' && make generate",
+    // ],
     executionMode: 'branch',
   },
   postUpdateOptions: [
