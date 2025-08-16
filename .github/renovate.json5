@@ -12,9 +12,7 @@
     'renovate',
   ],
   semanticCommits: 'enabled',
-  semanticCommitScope: 'deps',
   automerge: false,
-  useBaseBranchConfig: 'merge',
   pruneStaleBranches: true,
   postUpgradeTasks: {
     // commands: [
@@ -47,11 +45,12 @@
       matchDatasources: [
         'go',
       ],
-      groupName: 'azure-sdk-go',
+      groupName: 'cloud',
       enabled: true,
       matchPackageNames: [
         'github.com/Azure{/,}**',
         'github.com/AzureAD{/,}**',
+        'github.com/aws{/,}**',
       ],
     },
     {
@@ -61,88 +60,17 @@
         'golang.org/x/**',
         'github.com/golang{/,}**',
         'github.com/golang-jwt{/,}**',
-      ],
-      enabled: true,
-    },
-    {
-      description: 'AWS dependencies',
-      matchDatasources: [
-        'go',
-      ],
-      enabled: true,
-      groupName: 'aws-sdk-go',
-      matchPackageNames: [
-        'github.com/aws{/,}**',
-      ],
-    },
-    {
-      description: 'Google dependencies',
-      groupName: 'googledeps',
-      enabled: true,
-      matchDatasources: [
-        'go',
-      ],
-      matchPackageNames: [
         'github.com/google{/,}**',
         'github.com/googleapis{/,}**',
         '/^google.golang.org/',
-      ],
-    },
-    {
-      description: 'Hashicorp dependencies',
-      enabled: true,
-      matchDatasources: [
-        'go',
-      ],
-      groupName: 'hashicorp',
-      matchPackageNames: [
         'github.com/hashicorp{/,}**',
-      ],
-    },
-    {
-      description: 'Monitoring/metrics dependencies',
-      matchDatasources: [
-        'go',
-      ],
-      groupName: 'monitoring',
-      enabled: true,
-      matchPackageNames: [
-        '/github.com/prometheus.*/',
-        '/^go.opentelemetry.io/',
-      ],
-    },
-    {
-      description: 'Group testing tools',
-      matchPackageNames: [
         'github.com/onsi/ginkgo',
         'github.com/onsi/gomega',
         'github.com/stretchr/testify',
+        '/github.com/prometheus.*/',
+        '/^go.opentelemetry.io/',
       ],
-      groupName: 'testing',
-      matchDatasources: [
-        'go',
-      ],
-    },
-    {
-      description: 'Security updates should be raised immediately',
-      matchDatasources: [
-        'go',
-      ],
-      matchUpdateTypes: [
-        'patch',
-      ],
-      prPriority: 10,
-      labels: [
-        'security',
-        'priority/important',
-      ],
-      minimumReleaseAge: '0 days',
-      matchPackageNames: [
-        'golang.org/x/crypto',
-        'golang.org/x/net',
-        'github.com/golang-jwt/jwt',
-        'google.golang.org/protobuf',
-      ],
+      enabled: true,
     },
     {
       description: 'Limit major updates',
@@ -164,13 +92,6 @@
   ],
   prBodyDefinitions: {
     Package: '{{depName}}',
-    Type: '{{depType}}',
-    Update: '{{updateType}}',
-    'Current value': '{{currentValue}}',
-    'New value': '{{newValue}}',
-    Change: '`{{displayFrom}}` -> `{{displayTo}}`',
-    References: '{{references}}',
-    'Package file': '{{packageFile}}',
   },
   prBodyColumns: [
     'Package',
@@ -184,9 +105,6 @@
     '### Release Note\n```release-note\nNONE\n```',
     '**Note**: This PR was automatically created by Renovate Bot.',
     '',
-  ],
-  ignoreDeps: [
-    'launchpad.net/gocheck',
   ],
   constraints: {
     go: '>=1.21',
