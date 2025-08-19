@@ -10,7 +10,6 @@
   timezone: 'Europe/London',
   labels: [
     'dependencies',
-    'renovate',
   ],
   semanticCommits: 'enabled',
   postUpgradeTasks: {
