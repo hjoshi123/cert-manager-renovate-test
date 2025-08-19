@@ -30,13 +30,7 @@
       ],
       groupName: 'misc',
       matchPackageNames: [
-        'github.com/hashicorp{/,}**',
-        'github.com/onsi/ginkgo',
-        'github.com/onsi/gomega',
-        'github.com/stretchr/testify',
-        '/github.com/prometheus.*/',
-        '/^go.opentelemetry.io/',
-        '/.*/',
+        '*',        
       ],
     },
     {
