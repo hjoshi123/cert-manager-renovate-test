@@ -13,22 +13,32 @@
     'renovate',
   ],
   semanticCommits: 'enabled',
-  automerge: false,
-  pruneStaleBranches: true,
   postUpgradeTasks: {
-    // commands: [
-    //  "export PS1='> ' && make generate",
-    // ],
+    commands: [
+      "make generate",
+    ],
     executionMode: 'branch',
   },
-  postUpdateOptions: [
-    'gomodTidy',
-    'gomodUpdateImportPaths',
-  ],
   vulnerabilityAlerts: {
     enabled: false,
   },
   packageRules: [
+    {
+      description: 'Miscellaneous packages',
+      matchDatasources: [
+        'go',
+      ],
+      groupName: 'misc',
+      matchPackageNames: [
+        'github.com/hashicorp{/,}**',
+        'github.com/onsi/ginkgo',
+        'github.com/onsi/gomega',
+        'github.com/stretchr/testify',
+        '/github.com/prometheus.*/',
+        '/^go.opentelemetry.io/',
+        '/.*/',
+      ],
+    },
     {
       description: 'Kubernetes dependencies',
       matchDatasources: [
@@ -39,15 +49,13 @@
         'sigs.k8s.io{/,}**',
       ],
       groupName: 'kubernetes',
-      enabled: true,
     },
     {
-      description: 'Azure dependencies',
+      description: 'Cloud dependencies',
       matchDatasources: [
         'go',
       ],
       groupName: 'cloud',
-      enabled: true,
       matchPackageNames: [
         'github.com/Azure{/,}**',
         'github.com/AzureAD{/,}**',
@@ -64,30 +72,12 @@
         'github.com/google{/,}**',
         'github.com/googleapis{/,}**',
         '/^google.golang.org/',
-        'github.com/hashicorp{/,}**',
-        'github.com/onsi/ginkgo',
-        'github.com/onsi/gomega',
-        'github.com/stretchr/testify',
-        '/github.com/prometheus.*/',
-        '/^go.opentelemetry.io/',
       ],
-      enabled: true,
     },
     {
       description: 'Group GitHub Actions',
       matchManagers: [
         'github-actions',
-      ],
-    },
-    {
-      description: 'Limit major updates',
-      matchUpdateTypes: [
-        'major',
-      ],
-      dependencyDashboardApproval: true,
-      labels: [
-        'breaking-change',
-        'approval-needed',
       ],
     },
   ],
@@ -116,7 +106,4 @@
     '**Note**: This PR was automatically created by Renovate Bot.',
     '',
   ],
-  constraints: {
-    go: '>=1.21',
-  },
 }
