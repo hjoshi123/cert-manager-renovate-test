@@ -11,7 +11,9 @@
   labels: [
     'dependencies',
   ],
-  commitMessageSuffix: 'Signed-off-by: Renovate Bot <bot@renovateapp.com>',
+  gomod: {
+    managerFilePatterns: ['/(^|/)go\\.mod$/', '/.*(/)go\\.mod$/']
+  },
   semanticCommits: 'enabled',
   postUpgradeTasks: {
     commands: [
@@ -29,7 +31,7 @@
         'go',
       ],
       groupName: 'misc',
-      matchPackageNames: ['*'],
+      matchPackageNames: ['/.*/'],
     },
     {
       description: 'Kubernetes dependencies',
@@ -37,8 +39,8 @@
         'go',
       ],
       matchPackageNames: [
-        'sigs.k8s.io{/,}**',
-        'k8s.io{/,}**',
+        '/^sigs.k8s.io/',
+        '/^k8s.io/',
       ],
       groupName: 'kubernetes',
     },
@@ -49,28 +51,27 @@
       ],
       groupName: 'cloud',
       matchPackageNames: [
-        'github.com/Azure{/,}**',
-        'github.com/AzureAD{/,}**',
-        'github.com/aws{/,}**',
+        '/^github.com/Azure/',
+        '/^github.com/AzureAD/',
+        '/^github.com/aws/',
       ],
     },
     {
       description: 'Golang dependencies',
       groupName: 'go-deps',
       matchPackageNames: [
-        'golang.org/x{/,}**',
-        'github.com/golang{/,}**',
-        'github.com/golang-jwt{/,}**',
-        'github.com/google{/,}**',
-        'github.com/googleapis{/,}**',
+        '/^golang.org/x/',
+        '/^github.com/golang/',
+        '/^github.com/golang-jwt/',
+        '/^github.com/google/',
+        '/^github.com/googleapis/',
         '/^google.golang.org/',
-        'gopkg.in{/,}**',
+        '/^gopkg.in/',
       ],
     },
     // Currently, there seems to be issues with permissions which doesn't allow renovate to update actions.
-    // Grouping github actions is also an issue. Maybe adding groupName might help, but that's something to test.
     {
-      description: 'Group GitHub Actions',
+      description: 'GitHub Actions',
       matchManagers: [
         'github-actions',
       ],
@@ -81,7 +82,6 @@
     '**/vendor/**',
     '**/node_modules/**',
     '**/__tests__/**',
-    '**/test/**',
     '.github/workflows/govulncheck.yaml',
     '.github/workflows/make-self-upgrade.yaml',
     '.github/dependabot.yaml',
