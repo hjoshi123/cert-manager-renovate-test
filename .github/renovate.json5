@@ -11,7 +11,8 @@
   labels: [
     'dependencies',
   ],
-  commitMessageSuffix: 'Signed-off-by: Renovate Bot <bot@renovateapp.com>',
+  prHourlyLimit: 5,
+  commitMessageSuffix: '\n\nSigned-off-by: Renovate Bot <bot@renovateapp.com>',
   semanticCommits: 'enabled',
   postUpgradeTasks: {
     commands: [
