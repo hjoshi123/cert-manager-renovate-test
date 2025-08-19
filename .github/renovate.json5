@@ -73,6 +73,7 @@
       matchManagers: [
         'github-actions',
       ],
+      groupName: 'github-actions',
     },
   ],
   ignorePaths: [
