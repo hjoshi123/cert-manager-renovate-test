@@ -5,7 +5,7 @@ go 1.24.0
 replace github.com/cert-manager/webhook-cert-lib => ../
 
 require (
-	github.com/cert-manager/webhook-cert-lib v0.0.0-00010101000000-000000000000
+	github.com/cert-manager/webhook-cert-lib v0.0.0-20250820195723-38ae8572fb4f
 	github.com/onsi/ginkgo/v2 v2.23.4
 	github.com/onsi/gomega v1.37.0
 	k8s.io/api v0.33.2
