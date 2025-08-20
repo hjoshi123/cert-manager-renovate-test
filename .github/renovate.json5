@@ -11,32 +11,45 @@
     'dependencies',
   ],
   postUpgradeTasks: {
-    commands: ['make generate'],
+    commands: [
+      'make generate',
+    ],
     executionMode: 'branch',
   },
   packageRules: [
     {
       groupName: 'Misc Go deps',
-      matchManagers: ['golang'],
-      matchPackageNames: ['/.*/'],
+      matchManagers: [
+        'golang',
+      ],
+      matchPackageNames: [
+        '/.*/',
+      ],
     },
-    // Currently, there seems to be issues with permissions which doesn't allow Renovate to update actions.
     {
       groupName: 'GitHub Actions',
-      matchManagers: ['github-actions'],
-      matchPackageNames: ['/.*/'],
+      matchManagers: [
+        'github-actions',
+      ],
+      matchPackageNames: [
+        '/.*/',
+      ],
     },
     {
       groupName: 'Misc Go deps',
-      matchManagers: ['golang'],
+      matchManagers: [
+        'golang',
+      ],
       matchPackageNames: [
         '/^sigs.k8s.io/',
-        '/^k8s.io/'
+        '/^k8s.io/',
       ],
     },
     {
       groupName: 'Cloud Go deps',
-      matchManagers: ['golang'],
+      matchManagers: [
+        'golang',
+      ],
       matchPackageNames: [
         '/^github.com/Azure/',
         '/^github.com/AzureAD/',
@@ -45,7 +58,9 @@
     },
     {
       groupName: 'Golang deps',
-      matchManagers: ['golang'],
+      matchManagers: [
+        'golang',
+      ],
       matchPackageNames: [
         '/^golang.org/x/',
         '/^github.com/golang/',
@@ -58,9 +73,13 @@
     },
     {
       description: 'Disable all cert-manager related dependencies',
-      matchManagers: ['golang'],
-      matchPackageNames: ['/^github.com/cert-manager/'],
-      allowedVersions: ['!/0.0.0/'],
+      matchManagers: [
+        'golang',
+      ],
+      matchPackageNames: [
+        '/^github.com/cert-manager/',
+      ],
+      allowedVersions: '!/0.0.0/',
       enabled: false,
     },
   ],
@@ -68,7 +87,6 @@
     '**/vendor/**',
     '**/node_modules/**',
     '**/__tests__/**',
-    // The following files are managed from makefile-modules, and should be ignored by Renovate in other projects.
     '.github/workflows/govulncheck.yaml',
     '.github/workflows/make-self-upgrade.yaml',
     '.github/dependabot.yaml',
